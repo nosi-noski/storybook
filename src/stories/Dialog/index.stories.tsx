@@ -6,7 +6,7 @@ import { Dialog } from '../../components/UI/Dialog';
 import { Button } from '../../components/UI/Button';
 
 export default {
-  title: 'Example/Dialog',
+  title: 'UI/Component/Dialog',
   component: Dialog,
   parameters: { actions: { argTypesRegex: '^on.*' } },
 } as ComponentMeta<typeof Dialog>;
@@ -26,6 +26,15 @@ Basic.args = {
       <Button assign="contained" size="small" onClick={action('Сохранить')}>Сохранить</Button>
     </>
   ),
+  isOpen: true,
+  scrollable: false,
+  onClose: action('Закрыть'),
+};
+
+export const Notification = Template.bind({});
+Notification.args = {
+  title: 'Заголовок диалогового окна',
+  content: 'Содержимое диалогового окна',
   isOpen: true,
   scrollable: false,
   onClose: action('Закрыть'),

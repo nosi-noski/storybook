@@ -5,8 +5,13 @@ import { Label } from '../../components/UI/Label';
 import { Icon } from '../../components/UI/Icon';
 
 export default {
-  title: 'Example/LabelIcon',
+  title: 'UI/Component/LabelIcon',
   component: Label,
+  argTypes: {
+    type: {
+      control: { type: 'string' },
+    },
+  },
 } as ComponentMeta<typeof Label>;
 
 const Template: ComponentStory<typeof Label> = (args) => <Label {...args} />;

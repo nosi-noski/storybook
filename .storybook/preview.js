@@ -6,7 +6,7 @@ import { StylesProvider } from '@material-ui/styles';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core';
 
 import { theme } from '../src/mui/theme';
-import {GlobalStyle} from '../src/styled/global';
+import { GlobalStyle } from '../src/styled/global';
 
 const themes = [theme];
 addDecorator(withThemesProvider(themes, ThemeProvider));

@@ -25,7 +25,7 @@ Button.defaultProps = {
 };
 
 export default {
-  title: 'Example/Button',
+  title: 'UI/Component/Button',
   component: Button,
   argTypes: {
     assign: {
