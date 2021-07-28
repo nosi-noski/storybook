@@ -1,19 +1,15 @@
 import React from 'react';
-import { Typography, ColorTypographyVariants } from './styles';
+import { MuiLabel, ColorLabelVariants } from './styles';
 
 interface Props {
-  type: keyof typeof ColorTypographyVariants;
+  type?: keyof typeof ColorLabelVariants;
   children?: string | JSX.Element;
 }
 
-Label.defaultProps = {
-  children: '',
-};
-
-export function Label({ type, children }: Props) {
+export function Label({ type = 'default', children = '' }: Props) {
   return (
-    <Typography assign={type}>
+    <MuiLabel category={type}>
       {children}
-    </Typography>
+    </MuiLabel>
   );
 }

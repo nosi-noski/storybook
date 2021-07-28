@@ -6,6 +6,11 @@ import { Label } from '../../components/UI/Label';
 export default {
   title: 'UI/Component/Label',
   component: Label,
+  argTypes: {
+    type: {
+      control: false,
+    },
+  },
 } as ComponentMeta<typeof Label>;
 
 const Template: ComponentStory<typeof Label> = (args) => <Label {...args} />;

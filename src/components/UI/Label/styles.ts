@@ -1,7 +1,7 @@
 import { Typography as MiuTypography } from '@material-ui/core';
 import styled, { css } from 'styled-components';
 
-export const ColorTypographyVariants = {
+export const ColorLabelVariants = {
   info: css`
     ${({ theme: { custom: { lightTheme: { colors: { label: { color, backgroundColor } } } } } }) => css`
       color: ${color.info};
@@ -39,10 +39,10 @@ export const ColorTypographyVariants = {
 };
 
 interface Props {
-  assign? : keyof typeof ColorTypographyVariants;
+  category? : keyof typeof ColorLabelVariants;
 }
 
-export const Typography = styled(MiuTypography)<Props>`
+export const MuiLabel = styled(MiuTypography)<Props>`
   width: fit-content;
   display: flex;
   flex-direction: row;
@@ -61,5 +61,5 @@ export const Typography = styled(MiuTypography)<Props>`
   
   padding: ${(props) => (typeof props.children === 'string' ? '4px 12px' : '3px')};
 
-  ${({ assign }) => css`${ColorTypographyVariants[assign || 'default']}; `};
+  ${({ category }) => css`${ColorLabelVariants[category]}; `};
 `;
