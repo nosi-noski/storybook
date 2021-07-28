@@ -1,9 +1,16 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import styled from 'styled-components';
 
-import { Dialog } from '../../components/UI/Dialog';
+import { Dialog as MuiDialog } from '../../components/UI/Dialog';
 import { Button } from '../../components/UI/Button';
+
+const Dialog = styled(MuiDialog)`
+  .MuiDialog-root {
+    position: relative;
+  }
+`;
 
 export default {
   title: 'UI/Component/Dialog',
@@ -27,15 +34,6 @@ Basic.args = {
     </>
   ),
   isOpen: true,
-  scrollable: false,
-  onClose: action('Закрыть'),
-};
-
-export const Notification = Template.bind({});
-Notification.args = {
-  title: 'Заголовок диалогового окна',
-  content: 'Содержимое диалогового окна',
-  isOpen: true,
-  scrollable: false,
+  isScrollable: false,
   onClose: action('Закрыть'),
 };

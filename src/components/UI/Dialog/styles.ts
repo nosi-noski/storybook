@@ -6,7 +6,7 @@ import {
   DialogContent as MuiDialogContent,
 } from '@material-ui/core';
 
-import { H, Body } from '../Typography';
+import { Typography } from '../Typography';
 
 export const Dialog = styled(MuiDialog)`
   display: block;
@@ -24,7 +24,7 @@ export const Dialog = styled(MuiDialog)`
   }
 `;
 
-export const DialogTitle = styled(H)`
+export const DialogTitle = styled(Typography)`
   padding: 0 24px 13px;
   display: flex;
   flex-direction: row;
@@ -42,7 +42,7 @@ export const DialogContent = styled(MuiDialogContent)`
   }
 `;
 
-export const DialogContentText = styled(Body)`
+export const DialogContentText = styled(Typography)`
   padding: 0 24px;
   display: block;
   word-break: break-all;

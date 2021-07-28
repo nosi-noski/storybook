@@ -13,19 +13,12 @@ import {
 
 interface Props {
   isOpen: boolean;
-  scrollable?: boolean;
+  isScrollable?: boolean;
   onClose: () => void;
   title?: JSX.Element | string;
   content?: JSX.Element | string;
   actions?: JSX.Element;
 }
-
-Dialog.defaultProps = {
-  title: undefined,
-  content: undefined,
-  actions: undefined,
-  scrollable: false,
-};
 
 export function Dialog({
   title,
@@ -33,11 +26,11 @@ export function Dialog({
   actions,
   isOpen,
   onClose,
-  scrollable,
+  isScrollable = false,
 }: Props) {
   return (
     <MuiDialog open={isOpen}>
-      <DialogTitle size="Size5">
+      <DialogTitle variant="h5">
         <Title>{title}</Title>
         <IconButton
           assign="plain"
@@ -47,8 +40,8 @@ export function Dialog({
         />
       </DialogTitle>
       {content && (
-        <DialogContent dividers={scrollable}>
-          <DialogContentText size="Size2">
+        <DialogContent dividers={isScrollable}>
+          <DialogContentText variant="body2">
             {content}
           </DialogContentText>
         </DialogContent>
