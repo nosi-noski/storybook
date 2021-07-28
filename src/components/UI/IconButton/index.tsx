@@ -9,14 +9,9 @@ interface Props {
   startIcon?: JSX.Element;
 }
 
-IconButton.defaultProps = {
-  assign: undefined,
-  size: undefined,
-  startIcon: undefined,
-};
 export function IconButton({
-  assign,
-  size,
+  assign = 'outlined',
+  size = 'small',
   onClick,
   startIcon,
 }:Props) {

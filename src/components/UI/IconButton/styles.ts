@@ -127,9 +127,9 @@ export const IconButton = styled(MuiButton)<Props>`
   min-width: 36px;
   padding: 0;
   color: ${(props) => props.theme.custom.lightTheme.colors.typographyAndIcons.default.active};
-  .MuiButton-startIcon > *:first-child {
+  .MuiButton-startIcon span:first-child {
     padding-right: 0px;
   }
-  ${({ size }) => css` ${IconButtonSizeVariants[size || 'small']}; `};
-  ${({ assign }) => css` ${IconButtonColorVariants[assign || 'outlined']}; `};
+  ${({ size }) => css` ${IconButtonSizeVariants[size]}; `};
+  ${({ assign }) => css` ${IconButtonColorVariants[assign]}; `};
 `;
