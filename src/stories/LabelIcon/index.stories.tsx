@@ -9,7 +9,7 @@ export default {
   component: Label,
   argTypes: {
     type: {
-      control: { type: 'string' },
+      control: false,
     },
   },
 } as ComponentMeta<typeof Label>;
