@@ -10,7 +10,7 @@ export const MatIcon = styled.span`
   font-size: 24px;
   line-height: 1;
   font-family: ${(props) => props.theme.custom.fontFamily.beelineIcons};
-  .MuiButton-iconSizeSmall > *:first-child {
+  .MuiButton-iconSizeSmall span:first-child {
     font-size: 24px;
   }
 `;
