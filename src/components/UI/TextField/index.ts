@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { TextField as MuiTextField } from '@material-ui/core';
 
-const TextFieldSizeVariants = {
+export const TextFieldSizeVariants = {
   small: css`
     ${() => css`
 
@@ -51,7 +51,6 @@ const TextFieldSizeVariants = {
     }
 
     .MuiInputLabel-root.MuiInputLabel-animated.MuiFormLabel-root {
-      //margin-top: -4px;
       margin-top: 2px;
     }
 
@@ -59,7 +58,6 @@ const TextFieldSizeVariants = {
       left: 3px;
       margin-top: -1px;
     }
-  \` };
   `,
 };
 
@@ -182,5 +180,4 @@ export const TextField = styled(MuiTextField).attrs({ variant: 'outlined' })<Pro
       line-height: 20px;
     }
   `}
-
 `;
