@@ -64,64 +64,70 @@ export const getPlaceholder = (
   }
   return string;
 };
-export const replaceToMaskSymbol = (
+export function replaceToMaskSymbol(
   event: React.ChangeEvent<HTMLInputElement>,
   typedValueArr: string[],
   length: number,
-) => {
+) {
   const { selectionStart, selectionEnd } = event.target;
   const { inputType } = event.nativeEvent;
-  let replacedString = '●';
   const symbolLength = (length * 2 - 1);
   const valueLength = event.target.value.length;
   const digitLength = event.target.value.replaceAll(/[^0-9,'●']/g, '').length;
+  const replacedString = multiplyString('●', length > digitLength ? length - digitLength : 0);
   const missedSymbolsBackward = symbolLength - valueLength === 1 ? 1 : 0;
   const missedSymbolsForward = symbolLength - valueLength !== 1 ? 1 : 0;
   const missingSymbols = symbolLength - valueLength > 0 ? symbolLength - valueLength : 0;
   const isOddPosition = selectionStart % 2 === 0 ? 1 : 0;
   const reducer = symbolLength > typedValueArr.length ? 1 : 0;
+  debugger; // eslint-disable-line no-debugger
   switch (inputType) {
     case 'deleteContentBackward':
-      typedValueArr.join('').replaceAll(/[^0-9,'●']/g, '')
-        .split('')
-        .join(' ')
-        .split('');
-      replacedString = doubleString('●', getCountOddPositions(symbolLength, typedValueArr.length, selectionStart));
       typedValueArr.splice(
-        (selectionStart - missedSymbolsBackward),
+        (selectionStart < missedSymbolsForward
+          ? selectionStart
+          : selectionStart - missedSymbolsForward
+        ),
         symbolLength - selectionStart,
         (replacedString + typedValueArr.slice(selectionStart).join('')),
       );
       break;
     case 'deleteContentForward':
-      typedValueArr.join('').replaceAll(/[^0-9,'●']/g, '')
-        .split('')
-        .join(' ')
-        .split('');
-      replacedString = doubleString('●', getCountOddPositions(symbolLength, typedValueArr.length, selectionStart));
-      typedValueArr.splice((selectionStart - missedSymbolsForward), symbolLength - selectionStart, (replacedString + typedValueArr.slice(selectionStart + 1).join('')));
+      typedValueArr.splice(
+        (selectionStart - missedSymbolsForward),
+        symbolLength - selectionStart,
+        (replacedString + typedValueArr.slice(selectionStart + 1).join('')),
+      );
       break;
     case 'insertText':
       if (/[^0-9, \s, '●']/.test(event.target.value)) {
-        event.target.value = event.target.value.replaceAll(/[^0-9, \s, '●']/g, '');
-        replacedString = multiplyString('●', length - digitLength);
         typedValueArr.splice(selectionStart - 1, 1);
         typedValueArr.splice(selectionStart, typedValueArr.length - (selectionStart - 1), replacedString + typedValueArr.slice(selectionStart).join(''));
       }
       if (typedValueArr.join('').replaceAll(/[^0-9,'●']/g, '').length === length) {
-        return;
+        return typedValueArr.join('')
+          .replaceAll(/[^0-9,'●']/g, '')
+          .split('')
+          .join(' ');
       }
       if (typedValueArr.length === 1) {
-        replacedString = multiplyString('●', length - digitLength);
         typedValueArr.splice(selectionStart, 1, replacedString);
       } else if (symbolLength < typedValueArr.length) {
-        typedValueArr.splice(selectionStart, 1);
+        if (selectionStart === typedValueArr.length) typedValueArr.splice(selectionStart - 1, 1, '');
+        if (selectionStart < typedValueArr.length && !isOddPosition) typedValueArr.splice(selectionStart, 1, '');
+        if (selectionStart < typedValueArr.length && isOddPosition) typedValueArr.splice(selectionStart + 1, 1, '');
       } else {
-        replacedString = multiplyString('●', length - digitLength);
         typedValueArr.splice(selectionStart, typedValueArr.length - (selectionStart - 1), replacedString + typedValueArr.slice(selectionStart).join(''));
       }
       break;
     default:
       break;
   }
-};
+  // Удаление некорректных пробелов
+  // Добавление пробелов между символами
+  return typedValueArr.join('')
+    .replaceAll(/\s/g, '')
+    .replaceAll(/w/g, '')
+    .split('')
+    .join(' ');
+}

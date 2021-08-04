@@ -37,16 +37,9 @@ export function OTPTextField1({
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { selectionStart, selectionEnd } = event.target;
     const typedValueArr = event.target.value.split('');
-    let preparedValue = '';
-    let baredValue = '';
     // Подготовка массива символов без контроля пробелов.
-    replaceToMaskSymbol(event, typedValueArr, length);
-    // Удаление некорректных пробелов
-    baredValue = typedValueArr.join('').replaceAll(/\s/g, '').replaceAll(/w/g, '');
-    // Добавление пробелов между символами
-    preparedValue = baredValue.split('').join(' ');
-    // Передача
-    event.target.value = preparedValue;
+    event.target.value = replaceToMaskSymbol(event, typedValueArr, length);
+    console.log('event.target.value', event.target.value);
     setCursorPosition(event, selectionStart, selectionEnd);
     onChange(event);
   };
