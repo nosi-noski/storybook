@@ -103,7 +103,6 @@ export function replaceToMaskSymbol(
       break;
     case 'insertText':
       if (/[^0-9, \s, '●']/.test(event.target.value)) {
-        debugger; // eslint-disable-line no-debugger
         typedValueArr.splice((selectionStart - 1 < 0 ? 0 : selectionStart - 1), 1);
         typedValueArr.splice(
           (selectionStart - 1 < 0 ? 0 : selectionStart - 1),
