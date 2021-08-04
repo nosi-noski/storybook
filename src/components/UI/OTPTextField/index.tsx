@@ -39,7 +39,7 @@ export function OTPTextField1({
     const typedValueArr = event.target.value.split('');
     // Подготовка массива символов без контроля пробелов.
     event.target.value = replaceToMaskSymbol(event, typedValueArr, length);
-    console.log('event.target.value', event.target.value);
+    // Установка курсора в корректное положение
     setCursorPosition(event, selectionStart, selectionEnd);
     onChange(event);
   };

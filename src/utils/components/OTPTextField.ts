@@ -35,15 +35,19 @@ export const setCursorPosition = (
   const isPositionOdd = event.target.selectionStart % 2 !== 0;
   const fixPos = isPositionOdd ? 0 : 1;
   const { inputType } = event.nativeEvent;
-  if (inputType === 'deleteContentBackward') {
-    const position = start === 0 ? 0 : (start - 1 + fixPos);
-    event.target.setSelectionRange(position, position);
-  }
-  if (inputType === 'insertText') {
-    event.target.setSelectionRange(start + 1, end + 1);
-  }
-  if (inputType === 'deleteContentForward') {
-    event.target.setSelectionRange(start + 2, end + 2);
+  const position = start === 0 ? 0 : (start - 1 + fixPos);
+  switch (inputType) {
+    case 'deleteContentBackward':
+      event.target.setSelectionRange(position, position);
+      break;
+    case 'deleteContentForward':
+      event.target.setSelectionRange(start + 2, end + 2);
+      break;
+    case 'insertText':
+      event.target.setSelectionRange(start + 1, end + 1);
+      break;
+    default:
+      break;
   }
 };
 export const getPlaceholder = (
@@ -74,20 +78,21 @@ export function replaceToMaskSymbol(
   const symbolLength = (length * 2 - 1);
   const valueLength = event.target.value.length;
   const digitLength = event.target.value.replaceAll(/[^0-9,'●']/g, '').length;
-  const replacedString = multiplyString('●', length > digitLength ? length - digitLength : 0);
+  let replacedString = multiplyString('●', length > digitLength ? length - digitLength : 0);
   const missedSymbolsBackward = symbolLength - valueLength === 1 ? 1 : 0;
   const missedSymbolsForward = symbolLength - valueLength !== 1 ? 1 : 0;
   const missingSymbols = symbolLength - valueLength > 0 ? symbolLength - valueLength : 0;
   const isOddPosition = selectionStart % 2 === 0 ? 1 : 0;
   const reducer = symbolLength > typedValueArr.length ? 1 : 0;
-  debugger; // eslint-disable-line no-debugger
   switch (inputType) {
     case 'deleteContentBackward':
+      typedValueArr.join('').replaceAll(/[^0-9,'●']/g, '')
+        .split('')
+        .join(' ')
+        .split('');
+      replacedString = doubleString('●', getCountOddPositions(symbolLength, typedValueArr.length, selectionStart));
       typedValueArr.splice(
-        (selectionStart < missedSymbolsForward
-          ? selectionStart
-          : selectionStart - missedSymbolsForward
-        ),
+        (selectionStart - missedSymbolsBackward < 0 ? 0 : selectionStart - missedSymbolsBackward),
         symbolLength - selectionStart,
         (replacedString + typedValueArr.slice(selectionStart).join('')),
       );
