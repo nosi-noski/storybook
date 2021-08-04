@@ -10,7 +10,6 @@ export const getCountOddPositions = (
     if ((position + i) % 2 !== 0) {
       counter += 1;
     }
-    console.log('position + i:', position + i, ', counter:', counter);
   }
   return counter || 1;
 };
@@ -73,7 +72,7 @@ export function replaceToMaskSymbol(
   typedValueArr: string[],
   length: number,
 ) {
-  const { selectionStart, selectionEnd } = event.target;
+  const { selectionStart } = event.target;
   const { inputType } = event.nativeEvent;
   const symbolLength = (length * 2 - 1);
   const valueLength = event.target.value.length;
@@ -81,9 +80,7 @@ export function replaceToMaskSymbol(
   let replacedString = multiplyString('●', length > digitLength ? length - digitLength : 0);
   const missedSymbolsBackward = symbolLength - valueLength === 1 ? 1 : 0;
   const missedSymbolsForward = symbolLength - valueLength !== 1 ? 1 : 0;
-  const missingSymbols = symbolLength - valueLength > 0 ? symbolLength - valueLength : 0;
   const isOddPosition = selectionStart % 2 === 0 ? 1 : 0;
-  const reducer = symbolLength > typedValueArr.length ? 1 : 0;
   switch (inputType) {
     case 'deleteContentBackward':
       typedValueArr.join('').replaceAll(/[^0-9,'●']/g, '')
@@ -106,8 +103,13 @@ export function replaceToMaskSymbol(
       break;
     case 'insertText':
       if (/[^0-9, \s, '●']/.test(event.target.value)) {
-        typedValueArr.splice(selectionStart - 1, 1);
-        typedValueArr.splice(selectionStart, typedValueArr.length - (selectionStart - 1), replacedString + typedValueArr.slice(selectionStart).join(''));
+        debugger; // eslint-disable-line no-debugger
+        typedValueArr.splice((selectionStart - 1 < 0 ? 0 : selectionStart - 1), 1);
+        typedValueArr.splice(
+          (selectionStart - 1 < 0 ? 0 : selectionStart - 1),
+          typedValueArr.length - (selectionStart - 1),
+          replacedString + typedValueArr.slice((selectionStart - 1 < 0 ? 0 : selectionStart - 1)).join(''),
+        );
       }
       if (typedValueArr.join('').replaceAll(/[^0-9,'●']/g, '').length === length) {
         return typedValueArr.join('')

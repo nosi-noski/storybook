@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { OTPTextField as MuiOTPTextField, OTPTextField1 as MuiOTPTextField1 } from '../../components/UI/OTPTextField';
+import { OTPTextField as MuiOTPTextField } from '../../components/UI/OTPTextField';
 
 interface Props {
   value: string;
@@ -19,12 +19,11 @@ function OTPTextField({
 }:Props) {
   const [otpValue, setOtpValue] = useState('');
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // debugger; // eslint-disable-line no-debugger
     setOtpValue(event.target.value);
   };
   return (
     <>
-      <MuiOTPTextField1
+      <MuiOTPTextField
         helperText={helperText}
         isError={isError}
         value={value}

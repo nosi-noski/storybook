@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
-  getCountOddPositions,
-  doubleString,
   getPlaceholder,
   setCursorPosition,
   replaceToMaskSymbol,
-} from '../../../utils/components/OTPTextField';
+} from './utils';
 
 import { TextField } from './styles';
 
@@ -18,7 +16,7 @@ interface Props {
   length?: number;
   inputProps?: { maxLength: number };
 }
-export function OTPTextField1({
+export function OTPTextField({
   size,
   value,
   onChange,
@@ -27,12 +25,9 @@ export function OTPTextField1({
   length = 4,
   inputProps,
 }:Props) {
-  const [caretPos, setCaretPos] = useState(0);
   const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     const typedValue = event.target.value.replaceAll(/[^0-9]/g, '');
     event.target.value = typedValue.length === 0 ? '' : event.target.value;
-  };
-  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { selectionStart, selectionEnd } = event.target;
@@ -43,13 +38,11 @@ export function OTPTextField1({
     setCursorPosition(event, selectionStart, selectionEnd);
     onChange(event);
   };
-  useEffect(() => {}, [caretPos]);
   return (
     <TextField
       placeholder={getPlaceholder(true, length, '●')}
       value={value}
       onChange={handleChange}
-      onFocus={handleFocus}
       onBlur={handleBlur}
       size={size}
       error={isError}
