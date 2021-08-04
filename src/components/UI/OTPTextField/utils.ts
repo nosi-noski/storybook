@@ -133,7 +133,6 @@ export function replaceToMaskSymbol(
   // Добавление пробелов между символами
   return typedValueArr.join('')
     .replaceAll(/\s/g, '')
-    .replaceAll(/w/g, '')
     .split('')
     .join(' ');
 }
