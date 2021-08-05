@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   getPlaceholder,
   setCursorPosition,
@@ -31,16 +31,19 @@ export function OTPTextField({
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { selectionStart, selectionEnd } = event.target;
+    const startPosition = selectionStart || 0;
+    const endPosition = selectionEnd || 0;
     const typedValueArr = event.target.value.split('');
     // Подготовка массива символов без контроля пробелов.
     event.target.value = replaceToMaskSymbol(event, typedValueArr, length);
     // Установка курсора в корректное положение
-    setCursorPosition(event, selectionStart, selectionEnd);
+    setCursorPosition(event, startPosition, endPosition);
     onChange(event);
   };
+  const memoizedGetPlaceholder = useMemo(() => getPlaceholder(length), [length]);
   return (
     <TextField
-      placeholder={getPlaceholder(true, length, '●')}
+      placeholder={memoizedGetPlaceholder}
       value={value}
       onChange={handleChange}
       onBlur={handleBlur}
