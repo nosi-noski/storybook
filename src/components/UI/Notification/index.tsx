@@ -50,7 +50,7 @@ export function Notification({
   return (
     <Paper count={count}>
       <Middle>
-        { (!notificationList || notificationList.length <= 0) && (
+        { !count && (
           <>
             <EmptyListImg />
             <EmptyListTitle>Новых уведомлений нет</EmptyListTitle>
@@ -61,7 +61,7 @@ export function Notification({
             </EmptyListText>
           </>
         )}
-        { notificationList && notificationList.length > 0 && notificationList.map((item) => {
+        { !!count && notificationList.map((item) => {
           const {
             id,
             title,
@@ -84,7 +84,7 @@ export function Notification({
           );
         })}
       </Middle>
-      { notificationList && notificationList.length > 0 && (
+      { !!count && (
         <Bottom>
           <Button
             size="small"
