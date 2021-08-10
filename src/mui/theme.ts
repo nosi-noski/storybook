@@ -54,6 +54,9 @@ interface Mode {
         active: string;
         inactive: string;
         disabled: string;
+      },
+      custom : {
+        title: string;
       }
     };
     button: {
@@ -166,6 +169,9 @@ export const theme = createTheme({
             active: 'rgba(0, 0, 0, 0.87)',
             inactive: 'rgba(0, 0, 0, 0.6)',
             disabled: 'rgba(0, 0, 0, 0.38)',
+          },
+          custom: {
+            title: 'rgba(0, 0, 0, 0.58)',
           },
         },
         button: {
