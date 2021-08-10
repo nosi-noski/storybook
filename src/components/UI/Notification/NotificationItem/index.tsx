@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Item,
+  AvatarImg,
+  Body,
   Title,
   Author,
-  Message,
-  Date,
+  MessageRow,
+  DateRow,
   DateTime,
 } from './styles';
 
@@ -13,6 +15,9 @@ interface Props {
   title: string;
   author: string;
   dateTime: string;
+  isViewed: boolean;
+  avatar?: string;
+  onClick?: (id: number, event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export const NotificationItem = ({
@@ -20,14 +25,27 @@ export const NotificationItem = ({
   title,
   author,
   dateTime,
-}:Props) => (
-  <Item>
-    <Message>
-      <Author>{author}</Author>
-      <Title> {title}</Title>
-    </Message>
-    <Date>
-      <DateTime>{dateTime}</DateTime>
-    </Date>
-  </Item>
-);
+  avatar,
+  isViewed,
+  onClick,
+}:Props) => {
+  const elementClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (onClick && typeof (onClick) === 'function') {
+      onClick(id, event);
+    }
+  };
+  return (
+    <Item onClick={elementClickHandler} isViewed={isViewed}>
+      {avatar && <AvatarImg src={avatar} />}
+      <Body>
+        <MessageRow>
+          <Author>{author}</Author>
+          <Title> {title}</Title>
+        </MessageRow>
+        <DateRow>
+          <DateTime>{dateTime}</DateTime>
+        </DateRow>
+      </Body>
+    </Item>
+  );
+};
