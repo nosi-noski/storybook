@@ -51,6 +51,7 @@ function Notification({
       return notification;
     });
     setNotifications([...changedList]);
+    if (elementOnClick) elementOnClick(id, event);
   };
   useEffect(() => {
     if (!reload) {
@@ -130,6 +131,48 @@ General.args = {
       title: 'Заголовок уведомления, здесь много текста, весь текст не помещается, придётся скрывать излишки',
       author: 'Человеков Человек Человекович',
       dateTime: '2021-12-31 00:21',
+      isViewed: false,
+    },
+  ],
+};
+
+export const OneNotification = Template.bind({});
+OneNotification.args = {
+  elementOnClick: action('Клик по уведомлению'),
+  makeAllIsViewedButton: action('Клик по кнопке "Отметить все как прочитанное"'),
+  showAllButton: action('Клик по кнопке "Все уведомления"'),
+  notificationList: [
+    {
+      id: 2,
+      title: 'Заголовок',
+      author: 'Автор А.А.',
+      dateTime: '2021-12-31 00:20',
+      avatar: 'https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/girl_avatar_child_kid-48.png',
+      isViewed: false,
+    },
+  ],
+};
+
+export const TwoNotifications = Template.bind({});
+TwoNotifications.args = {
+  elementOnClick: action('Клик по уведомлению'),
+  makeAllIsViewedButton: action('Клик по кнопке "Отметить все как прочитанное"'),
+  showAllButton: action('Клик по кнопке "Все уведомления"'),
+  notificationList: [
+    {
+      id: 1,
+      title: 'Заголовок уведомления, здесь много текста, весь текст не помещается, придётся сткрывать излишки',
+      author: 'Брюс Уэйн',
+      dateTime: '2021-12-31 00:19',
+      avatar: 'https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-48.png',
+      isViewed: true,
+    },
+    {
+      id: 2,
+      title: 'Заголовок',
+      author: 'Автор А.А.',
+      dateTime: '2021-12-31 00:20',
+      avatar: 'https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/girl_avatar_child_kid-48.png',
       isViewed: false,
     },
   ],

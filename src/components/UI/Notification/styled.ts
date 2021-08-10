@@ -1,13 +1,31 @@
 import styled from 'styled-components';
 import { Paper as MuiPaper } from '@material-ui/core';
 import { Button as MuiButton } from '../Button';
-import No_notifications from '../../../assets/No_notifications.png';
+import { Typography } from '../Typography';
+import EmptyNotificationListImg from '../../../assets/Empty-Notification-List.png';
 
-export const Paper = styled(MuiPaper)`
+interface Props {
+  count: number;
+}
+
+export const Paper = styled(MuiPaper)<Props>`
   width: 375px;
-  height: 500px;
   max-width: 375px;
-  max-height: 60vh;
+  min-height: ${({ count }) => {
+    if (!count) return '450px';
+    if (count === 1) {
+      return '141px';
+    }
+    return '200px';
+  }};
+  max-height: ${({ count }) => (count ? '60vh' : '450px')};
+  max-height: ${({ count }) => {
+    if (!count) return '450px';
+    if (count === 1) {
+      return '141px';
+    }
+    return '60vh';
+  }};
   box-shadow: ${(props) => props.theme.custom.lightTheme.colors.boxShadow.paper};
   position: absolute;
   right: 0;
@@ -23,28 +41,60 @@ export const Middle = styled.div`
   height: 100%;
   align-items: center;
   overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 7px;
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme.custom.lightTheme.colors.typographyAndIcons.default.disabled};
+    border-radius: 16px;
+  }
 `;
 
 export const Bottom = styled.div`
   height: 36px;
-  padding: 8px;
+  padding: 8px 0;
   display: flex;
   flex: 1 1 auto;
   justify-content: center;
   align-content: center;
 `;
 
-export const NoNotificationsImg = styled.img.attrs({ src: No_notifications })`
+export const EmptyListImg = styled.img.attrs({ src: EmptyNotificationListImg })`
   width: 300px;
   height: 300px;
+`;
+export const EmptyListTitle = styled(Typography)`
+  font-size: 14px !important;
+  line-height: 16px !important;
+  color: ${(props) => props.theme.custom.lightTheme.colors.typographyAndIcons.custom.title};
+`;
+export const EmptyListText = styled(Typography).attrs({ variant: 'caption' })`
+  font-size: 10px !important;
+  line-height: 14px !important;
+  padding-top: 8px;
+  color: ${(props) => props.theme.custom.lightTheme.colors.typographyAndIcons.custom.title};
+`;
+export const LinkButton = styled.button`
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: 700;
+  border: none;
+  background-color: transparent;
+  display: contents;
+  padding: 0;
+  cursor: pointer;
+  color: ${(props) => props.theme.custom.lightTheme.colors.typographyAndIcons.custom.title};
 `;
 
 export const Button = styled(MuiButton)`
   color: ${(props) => props.theme.custom.lightTheme.colors.typographyAndIcons.default.error};
-`;
-
-export const Item = styled.div`
-  height: 88px;
-  padding: 16px;
-  background-color: cadetblue;
+  font-weight: 700;
+  padding: 8px;
+  &:disabled {
+    color: ${(props) => props.theme.custom.lightTheme.colors.typographyAndIcons.default.disabled};
+  }
+  &:hover {
+    background-color: transparent;
+  }
 `;

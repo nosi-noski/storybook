@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { NotificationItem as MuiNotificationItem } from './NotificationItem';
 
 import {
@@ -10,7 +10,6 @@ import {
   EmptyListText,
   EmptyListTitle,
   LinkButton,
-  Item,
 } from './styled';
 
 type NotificationItem = {
@@ -47,8 +46,9 @@ export function Notification({
   const clickShowAllHandler = () => {
     if (showAllButton) showAllButton();
   };
+  const count = notificationList ? notificationList.length : 0;
   return (
-    <Paper isempty={(!notificationList || notificationList.length <= 0)}>
+    <Paper count={count}>
       <Middle>
         { (!notificationList || notificationList.length <= 0) && (
           <>

@@ -1,19 +1,37 @@
 import styled from 'styled-components';
 import { Typography } from '../../Typography';
 
-export const Item = styled.div`
+interface Props {
+  isViewed: boolean;
+}
+
+export const Item = styled.div<Props>`
+  display: flex;
+  flex-direction: row;
+  width: -webkit-fill-available;
+  min-height: 56px;
+  padding: 16px;
+  border-bottom: 1px solid rgba(226, 226, 226, 1);
+  cursor: pointer;
+  background-color: ${({ isViewed }) => (isViewed ? 'none' : 'rgba(207, 216, 220, 0.3)')};
+`;
+
+export const Body = styled.div`
   display: flex;
   flex-direction: column;
-  width: -webkit-fill-available;
-  max-height: 72px;
-  padding: 16px;
-  background-color: rgba(207, 216, 220, 0.3);
-  border-bottom: 1px solid rgba(226, 226, 226, 1);
 `;
-export const Message = styled.div`
+
+export const MessageRow = styled.span`
   display: flex;
+  max-height: 40px;
+  overflow: hidden;
+  word-break: break-all;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
-export const Date = styled(Message)`
+export const DateRow = styled(MessageRow)`
   padding-top: 8px;
 `;
 export const Author = styled(Typography).attrs({ variant: 'body2' })`
@@ -28,7 +46,13 @@ export const Title = styled(Typography)`
   display: contents;
 `;
 export const DateTime = styled(Typography)`
-  font-size: 13px !important;
+  font-size: 12px !important;
   line-height: 16px !important;
   color: ${(props) => props.theme.custom.lightTheme.colors.label.color.default}
+`;
+
+export const AvatarImg = styled.img`
+  padding-right: 16px;
+  width: 40px;
+  height: 40px;
 `;
