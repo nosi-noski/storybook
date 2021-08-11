@@ -16,19 +16,20 @@ type NotificationItem = {
 interface Props {
   notificationList: NotificationItem[];
   elementOnClick?: (id: number, event: React.MouseEvent<HTMLDivElement>) => void;
-  makeAllIsViewedButton?: () => void;
-  showAllButton?: () => void;
-  isMakeAllViewedButtonDisabled?: boolean;
+  toggleButtonOnClick?: () => void;
+  showAllButtonOnClick?: () => void;
+  isToggleButtonDisabled?: boolean;
 }
 
 function Notification({
   notificationList,
   elementOnClick,
-  makeAllIsViewedButton,
-  showAllButton,
-  isMakeAllViewedButtonDisabled = false,
+  toggleButtonOnClick,
+  showAllButtonOnClick,
+  isToggleButtonDisabled = false,
 }:Props) {
   const [notifications, setNotifications] = useState<NotificationItem[]>(notificationList);
+  const [isDisabled, setIsDisabled] = useState<boolean>(isToggleButtonDisabled);
   const [reload, setReload] = useState<boolean>(false);
   const makeAllIsViewed = (notificationItems: NotificationItem[]) => {
     const changedArray = notificationItems.map((notification) => {
@@ -37,13 +38,14 @@ function Notification({
     });
     return changedArray;
   };
-  const handleMakeAllIsViewedButtonClick = () => {
+  const handletoggleButtonClick = () => {
     const changedNotifications = makeAllIsViewed(notifications);
+    setIsDisabled(true);
     setNotifications([...changedNotifications]);
-    if (makeAllIsViewedButton) makeAllIsViewedButton();
+    if (toggleButtonOnClick) toggleButtonOnClick();
   };
   const handleShowAllButtonClick = () => {
-    if (showAllButton) showAllButton();
+    if (showAllButtonOnClick) showAllButtonOnClick();
   };
   const handleElementClick = (id: number, event: React.MouseEvent<HTMLDivElement>) => {
     const changedList = notificationList.map((notification) => {
@@ -66,9 +68,9 @@ function Notification({
     <MuiNotification
       notificationList={notifications}
       elementOnClick={handleElementClick}
-      makeAllIsViewedButton={handleMakeAllIsViewedButtonClick}
-      showAllButton={handleShowAllButtonClick}
-      isMakeAllViewedButtonDisabled={isMakeAllViewedButtonDisabled}
+      toggleButtonOnClick={handletoggleButtonClick}
+      showAllButtonOnClick={handleShowAllButtonClick}
+      isToggleButtonDisabled={isDisabled}
     />
   );
 }
@@ -83,8 +85,8 @@ const Template: ComponentStory<typeof Notification> = (args) => <Notification {.
 export const General = Template.bind({});
 General.args = {
   elementOnClick: action('Клик по уведомлению'),
-  makeAllIsViewedButton: action('Клик по кнопке "Отметить все как прочитанное"'),
-  showAllButton: action('Клик по кнопке "Все уведомления"'),
+  toggleButtonOnClick: action('Клик по кнопке "Отметить все как прочитанное"'),
+  showAllButtonOnClick: action('Клик по кнопке "Все уведомления"'),
   notificationList: [
     {
       id: 1,
@@ -138,9 +140,10 @@ General.args = {
 
 export const OneNotification = Template.bind({});
 OneNotification.args = {
+  isToggleButtonDisabled: true,
   elementOnClick: action('Клик по уведомлению'),
-  makeAllIsViewedButton: action('Клик по кнопке "Отметить все как прочитанное"'),
-  showAllButton: action('Клик по кнопке "Все уведомления"'),
+  toggleButtonOnClick: action('Клик по кнопке "Отметить все как прочитанное"'),
+  showAllButtonOnClick: action('Клик по кнопке "Все уведомления"'),
   notificationList: [
     {
       id: 2,
@@ -148,7 +151,7 @@ OneNotification.args = {
       author: 'Автор А.А.',
       dateTime: '2021-12-31 00:20',
       avatar: 'https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/girl_avatar_child_kid-48.png',
-      isViewed: false,
+      isViewed: true,
     },
   ],
 };
@@ -156,8 +159,8 @@ OneNotification.args = {
 export const TwoNotifications = Template.bind({});
 TwoNotifications.args = {
   elementOnClick: action('Клик по уведомлению'),
-  makeAllIsViewedButton: action('Клик по кнопке "Отметить все как прочитанное"'),
-  showAllButton: action('Клик по кнопке "Все уведомления"'),
+  toggleButtonOnClick: action('Клик по кнопке "Отметить все как прочитанное"'),
+  showAllButtonOnClick: action('Клик по кнопке "Все уведомления"'),
   notificationList: [
     {
       id: 1,

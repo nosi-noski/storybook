@@ -25,26 +25,26 @@ type NotificationItem = {
 interface Props {
   notificationList: NotificationItem[],
   elementOnClick?: (id: number, event: React.MouseEvent<HTMLDivElement>) => void;
-  makeAllIsViewedButton?: () => void;
-  showAllButton?: () => void;
-  isMakeAllViewedButtonDisabled?: boolean;
+  toggleButtonOnClick?: () => void;
+  showAllButtonOnClick?: () => void;
+  isToggleButtonDisabled?: boolean;
 }
 
 export function Notification({
   notificationList,
   elementOnClick,
-  makeAllIsViewedButton,
-  showAllButton,
-  isMakeAllViewedButtonDisabled = false,
+  toggleButtonOnClick,
+  showAllButtonOnClick,
+  isToggleButtonDisabled = false,
 }:Props) {
-  const clickElementHandler = (id: number, event: React.MouseEvent<HTMLDivElement>) => {
+  const handleElementClick = (id: number, event: React.MouseEvent<HTMLDivElement>) => {
     if (elementOnClick) elementOnClick(id, event);
   };
-  const clickMakeAllIsViewedHandler = () => {
-    if (makeAllIsViewedButton) makeAllIsViewedButton();
+  const handleToggleButtonClick = () => {
+    if (toggleButtonOnClick) toggleButtonOnClick();
   };
-  const clickShowAllHandler = () => {
-    if (showAllButton) showAllButton();
+  const handleshowAllButtonClick = () => {
+    if (showAllButtonOnClick) showAllButtonOnClick();
   };
   const count = notificationList ? notificationList.length : 0;
   return (
@@ -56,7 +56,7 @@ export function Notification({
             <EmptyListTitle>Новых уведомлений нет</EmptyListTitle>
             <EmptyListText>
               Но вы можете
-              <LinkButton onClick={clickShowAllHandler}> Посмотреть все </LinkButton>
+              <LinkButton onClick={handleshowAllButtonClick}> Посмотреть все </LinkButton>
               полученные уведомления
             </EmptyListText>
           </>
@@ -79,7 +79,7 @@ export function Notification({
               dateTime={dateTime}
               avatar={avatar}
               isViewed={isViewed}
-              onClick={clickElementHandler}
+              onClick={handleElementClick}
             />
           );
         })}
@@ -89,14 +89,14 @@ export function Notification({
           <Button
             size="small"
             assign="plain"
-            onClick={clickMakeAllIsViewedHandler}
-            disabled={isMakeAllViewedButtonDisabled}
+            onClick={handleToggleButtonClick}
+            disabled={isToggleButtonDisabled}
           >Отметить все как прочитанное
           </Button>
           <Button
             size="small"
             assign="plain"
-            onClick={clickShowAllHandler}
+            onClick={handleshowAllButtonClick}
           >Все уведомления
           </Button>
         </Bottom>
