@@ -9,6 +9,7 @@ export const Item = styled.div<Props>`
   display: flex;
   flex-direction: row;
   width: -webkit-fill-available;
+  width: -moz-available;
   min-height: 56px;
   padding: 16px;
   border-bottom: 1px solid rgba(226, 226, 226, 1);
@@ -26,7 +27,6 @@ export const MessageRow = styled.span`
   max-height: 40px;
   overflow: hidden;
   word-break: break-all;
-  overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -35,15 +35,14 @@ export const DateRow = styled(MessageRow)`
   padding-top: 8px;
 `;
 export const Author = styled(Typography).attrs({ variant: 'body2' })`
-  font-size: 13px !important;
-  line-height: 16px !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
   font-weight: 700 !important;
-  display: contents;
+  display: inline-block;
 `;
 export const Title = styled(Typography)`
   font-size: 13px !important;
   line-height: 16px !important;
-  display: contents;
 `;
 export const DateTime = styled(Typography)`
   font-size: 12px !important;

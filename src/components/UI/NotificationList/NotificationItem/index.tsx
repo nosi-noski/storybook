@@ -29,18 +29,17 @@ export const NotificationItem = ({
   isViewed,
   onClick,
 }:Props) => {
-  const elementClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (onClick && typeof (onClick) === 'function') {
       onClick(id, event);
     }
   };
   return (
-    <Item onClick={elementClickHandler} isViewed={isViewed}>
+    <Item onClick={handleClick} isViewed={isViewed}>
       {avatar && <AvatarImg src={avatar} />}
       <Body>
         <MessageRow>
-          <Author>{author}</Author>
-          <Title> {title}</Title>
+          <Title><Author>{author}</Author> {title}</Title>
         </MessageRow>
         <DateRow>
           <DateTime>{dateTime}</DateTime>

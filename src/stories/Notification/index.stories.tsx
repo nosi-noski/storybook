@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { Notification as MuiNotification } from '../../components/UI/Notification';
+import { NotificationList as MuiNotificationList } from '../../components/UI/NotificationList';
 
 type NotificationItem = {
   id: number;
@@ -19,14 +19,18 @@ interface Props {
   toggleButtonOnClick?: () => void;
   showAllButtonOnClick?: () => void;
   isToggleButtonDisabled?: boolean;
+  verticalPosition?: string;
+  horisontalPosition?: string;
 }
 
-function Notification({
+function NotificationList({
   notificationList,
   elementOnClick,
   toggleButtonOnClick,
   showAllButtonOnClick,
-  isToggleButtonDisabled = false,
+  isToggleButtonDisabled,
+  horisontalPosition,
+  verticalPosition,
 }:Props) {
   const [notifications, setNotifications] = useState<NotificationItem[]>(notificationList);
   const [isDisabled, setIsDisabled] = useState<boolean>(isToggleButtonDisabled);
@@ -42,18 +46,26 @@ function Notification({
     const changedNotifications = makeAllIsViewed(notifications);
     setIsDisabled(true);
     setNotifications([...changedNotifications]);
-    if (toggleButtonOnClick) toggleButtonOnClick();
+    if (toggleButtonOnClick) {
+      toggleButtonOnClick();
+    }
   };
   const handleShowAllButtonClick = () => {
-    if (showAllButtonOnClick) showAllButtonOnClick();
+    if (showAllButtonOnClick) {
+      showAllButtonOnClick();
+    }
   };
   const handleElementClick = (id: number, event: React.MouseEvent<HTMLDivElement>) => {
     const changedList = notificationList.map((notification) => {
-      if (notification.id === id) notification.isViewed = true;
+      if (notification.id === id) {
+        notification.isViewed = true;
+      }
       return notification;
     });
     setNotifications([...changedList]);
-    if (elementOnClick) elementOnClick(id, event);
+    if (elementOnClick) {
+      elementOnClick(id, event);
+    }
   };
   useEffect(() => {
     if (!reload) {
@@ -65,7 +77,9 @@ function Notification({
     setReload(false);
   }, [reload]);
   return (
-    <MuiNotification
+    <MuiNotificationList
+      verticalPosition={verticalPosition}
+      horisontalPosition={horisontalPosition}
       notificationList={notifications}
       elementOnClick={handleElementClick}
       toggleButtonOnClick={handletoggleButtonClick}
@@ -77,13 +91,15 @@ function Notification({
 
 export default {
   title: 'UI/Component/Notification',
-  component: Notification,
-} as ComponentMeta<typeof Notification>;
+  component: NotificationList,
+} as ComponentMeta<typeof NotificationList>;
 
-const Template: ComponentStory<typeof Notification> = (args) => <Notification {...args} />;
+const Template: ComponentStory<typeof NotificationList> = (args) => <NotificationList {...args} />;
 
 export const General = Template.bind({});
 General.args = {
+  verticalPosition: 'top',
+  horisontalPosition: 'right',
   elementOnClick: action('Клик по уведомлению'),
   toggleButtonOnClick: action('Клик по кнопке "Отметить все как прочитанное"'),
   showAllButtonOnClick: action('Клик по кнопке "Все уведомления"'),
@@ -140,6 +156,8 @@ General.args = {
 
 export const OneNotification = Template.bind({});
 OneNotification.args = {
+  verticalPosition: 'bottom',
+  horisontalPosition: 'left',
   isToggleButtonDisabled: true,
   elementOnClick: action('Клик по уведомлению'),
   toggleButtonOnClick: action('Клик по кнопке "Отметить все как прочитанное"'),
@@ -158,6 +176,8 @@ OneNotification.args = {
 
 export const TwoNotifications = Template.bind({});
 TwoNotifications.args = {
+  verticalPosition: 'bottom',
+  horisontalPosition: 'right',
   elementOnClick: action('Клик по уведомлению'),
   toggleButtonOnClick: action('Клик по кнопке "Отметить все как прочитанное"'),
   showAllButtonOnClick: action('Клик по кнопке "Все уведомления"'),
@@ -181,5 +201,40 @@ TwoNotifications.args = {
   ],
 };
 
+export const ThreeNotifications = Template.bind({});
+ThreeNotifications.args = {
+  elementOnClick: action('Клик по уведомлению'),
+  toggleButtonOnClick: action('Клик по кнопке "Отметить все как прочитанное"'),
+  showAllButtonOnClick: action('Клик по кнопке "Все уведомления"'),
+  notificationList: [
+    {
+      id: 1,
+      title: 'Заголовок уведомления, здесь много текста, весь текст не помещается, придётся сткрывать излишки',
+      author: 'Брюс Уэйн',
+      dateTime: '2021-12-31 00:19',
+      avatar: 'https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-48.png',
+      isViewed: true,
+    },
+    {
+      id: 2,
+      title: 'Заголовок',
+      author: 'Автор А.А.',
+      dateTime: '2021-12-31 00:20',
+      avatar: 'https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/girl_avatar_child_kid-48.png',
+      isViewed: false,
+    },
+    {
+      id: 3,
+      title: 'Заголовок3',
+      author: 'Человеков Человек Человекович',
+      dateTime: '2021-12-31 00:21',
+      avatar: '',
+      isViewed: false,
+    },
+  ],
+};
+
 export const Empty = Template.bind({});
-Empty.args = {};
+Empty.args = {
+  notificationList: [],
+};
