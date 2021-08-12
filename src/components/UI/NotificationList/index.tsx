@@ -25,9 +25,9 @@ interface NotificationItem {
 
 interface Props {
   notificationList: NotificationItem[],
-  elementOnClick?: (id: number, event: React.MouseEvent<HTMLDivElement>) => void;
-  toggleButtonOnClick?: () => void;
-  showAllButtonOnClick?: () => void;
+  onClick?: (id: number, event: React.MouseEvent<HTMLDivElement>) => void;
+  onToggleButtonClick?: () => void;
+  onShowAllButtonClick?: () => void;
   isToggleButtonDisabled?: boolean;
   verticalAlign?: string;
   horisontalAlign?: string;
@@ -35,26 +35,26 @@ interface Props {
 
 export function NotificationList({
   notificationList,
-  elementOnClick,
-  toggleButtonOnClick,
-  showAllButtonOnClick,
+  onClick,
+  onToggleButtonClick,
+  onShowAllButtonClick,
   isToggleButtonDisabled = false,
   verticalAlign = 'top',
   horisontalAlign = 'right',
 }:Props) {
   const handleElementClick = (id: number, event: React.MouseEvent<HTMLDivElement>) => {
-    if (elementOnClick) {
-      elementOnClick(id, event);
+    if (onClick) {
+      onClick(id, event);
     }
   };
   const handleToggleButtonClick = () => {
-    if (toggleButtonOnClick) {
-      toggleButtonOnClick();
+    if (onToggleButtonClick) {
+      onToggleButtonClick();
     }
   };
   const handleShowAllButtonClick = () => {
-    if (showAllButtonOnClick) {
-      showAllButtonOnClick();
+    if (onShowAllButtonClick) {
+      onShowAllButtonClick();
     }
   };
   const count = notificationList.length;
