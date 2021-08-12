@@ -29,7 +29,7 @@ export const Paper = styled(MuiPaper)<Props>`
     if (count === 1) {
       return '141px';
     }
-    return '440px';
+    return '450px';
   }};
   ${({ vertical, horizontal }) => css`
       ${vertical}: 0;

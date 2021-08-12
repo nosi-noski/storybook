@@ -29,8 +29,8 @@ interface Props {
   toggleButtonOnClick?: () => void;
   showAllButtonOnClick?: () => void;
   isToggleButtonDisabled?: boolean;
-  verticalPosition?: string;
-  horisontalPosition?: string;
+  verticalAlign?: string;
+  horisontalAlign?: string;
 }
 
 export function NotificationList({
@@ -39,8 +39,8 @@ export function NotificationList({
   toggleButtonOnClick,
   showAllButtonOnClick,
   isToggleButtonDisabled = false,
-  verticalPosition = 'top',
-  horisontalPosition = 'right',
+  verticalAlign = 'top',
+  horisontalAlign = 'right',
 }:Props) {
   const handleElementClick = (id: number, event: React.MouseEvent<HTMLDivElement>) => {
     if (elementOnClick) {
@@ -59,7 +59,7 @@ export function NotificationList({
   };
   const count = notificationList.length;
   return (
-    <Paper count={count} vertical={verticalPosition} horizontal={horisontalPosition}>
+    <Paper count={count} vertical={verticalAlign} horizontal={horisontalAlign}>
       { !count && <EmptyList onClick={handleShowAllButtonClick} />}
       { count > 0 && (
         <FilledList

@@ -19,8 +19,8 @@ interface Props {
   toggleButtonOnClick?: () => void;
   showAllButtonOnClick?: () => void;
   isToggleButtonDisabled?: boolean;
-  verticalPosition?: string;
-  horisontalPosition?: string;
+  verticalAlign?: string;
+  horisontalAlign?: string;
 }
 
 function NotificationList({
@@ -29,8 +29,8 @@ function NotificationList({
   toggleButtonOnClick,
   showAllButtonOnClick,
   isToggleButtonDisabled,
-  horisontalPosition,
-  verticalPosition,
+  horisontalAlign,
+  verticalAlign,
 }:Props) {
   const [notifications, setNotifications] = useState<NotificationItem[]>(notificationList);
   const [isDisabled, setIsDisabled] = useState<boolean>(isToggleButtonDisabled);
@@ -78,8 +78,8 @@ function NotificationList({
   }, [reload]);
   return (
     <MuiNotificationList
-      verticalPosition={verticalPosition}
-      horisontalPosition={horisontalPosition}
+      verticalAlign={verticalAlign}
+      horisontalAlign={horisontalAlign}
       notificationList={notifications}
       elementOnClick={handleElementClick}
       toggleButtonOnClick={handletoggleButtonClick}
@@ -98,8 +98,8 @@ const Template: ComponentStory<typeof NotificationList> = (args) => <Notificatio
 
 export const General = Template.bind({});
 General.args = {
-  verticalPosition: 'top',
-  horisontalPosition: 'right',
+  verticalAlign: 'top',
+  horisontalAlign: 'right',
   elementOnClick: action('Клик по уведомлению'),
   toggleButtonOnClick: action('Клик по кнопке "Отметить все как прочитанное"'),
   showAllButtonOnClick: action('Клик по кнопке "Все уведомления"'),
@@ -156,8 +156,8 @@ General.args = {
 
 export const OneNotification = Template.bind({});
 OneNotification.args = {
-  verticalPosition: 'bottom',
-  horisontalPosition: 'left',
+  verticalAlign: 'bottom',
+  horisontalAlign: 'left',
   isToggleButtonDisabled: true,
   elementOnClick: action('Клик по уведомлению'),
   toggleButtonOnClick: action('Клик по кнопке "Отметить все как прочитанное"'),
@@ -176,8 +176,8 @@ OneNotification.args = {
 
 export const TwoNotifications = Template.bind({});
 TwoNotifications.args = {
-  verticalPosition: 'bottom',
-  horisontalPosition: 'right',
+  verticalAlign: 'bottom',
+  horisontalAlign: 'right',
   elementOnClick: action('Клик по уведомлению'),
   toggleButtonOnClick: action('Клик по кнопке "Отметить все как прочитанное"'),
   showAllButtonOnClick: action('Клик по кнопке "Все уведомления"'),
