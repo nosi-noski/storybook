@@ -2,19 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { NotificationList as MuiNotificationList } from '../../components/UI/NotificationList';
-
-type NotificationItem = {
-  id: number;
-  title: string;
-  author: string;
-  dateTime: string;
-  avatar?: string;
-  isViewed: boolean;
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
-};
+import { Notification } from '../../components/UI/NotificationList/NotificationItem';
 
 interface Props {
-  notificationList: NotificationItem[];
+  notificationList: Notification[];
   onClick?: (id: number, event: React.MouseEvent<HTMLDivElement>) => void;
   onToggleButtonClick?: () => void;
   onShowAllButtonClick?: () => void;
@@ -32,10 +23,10 @@ function NotificationList({
   horisontalAlign,
   verticalAlign,
 }:Props) {
-  const [notifications, setNotifications] = useState<NotificationItem[]>(notificationList);
+  const [notifications, setNotifications] = useState<Notification[]>(notificationList);
   const [isDisabled, setIsDisabled] = useState<boolean>(isToggleButtonDisabled);
   const [reload, setReload] = useState<boolean>(false);
-  const makeAllIsViewed = (notificationItems: NotificationItem[]) => {
+  const makeAllIsViewed = (notificationItems: Notification[]) => {
     const changedArray = notificationItems.map((notification) => {
       notification.isViewed = true;
       return notification;
@@ -46,14 +37,10 @@ function NotificationList({
     const changedNotifications = makeAllIsViewed(notifications);
     setIsDisabled(true);
     setNotifications([...changedNotifications]);
-    if (onToggleButtonClick) {
-      onToggleButtonClick();
-    }
+    onToggleButtonClick?.();
   };
   const handleShowAllButtonClick = () => {
-    if (onShowAllButtonClick) {
-      onShowAllButtonClick();
-    }
+    onShowAllButtonClick?.();
   };
   const handleElementClick = (id: number, event: React.MouseEvent<HTMLDivElement>) => {
     const changedList = notificationList.map((notification) => {
@@ -63,9 +50,7 @@ function NotificationList({
       return notification;
     });
     setNotifications([...changedList]);
-    if (onClick) {
-      onClick(id, event);
-    }
+    onClick?.(id, event);
   };
   useEffect(() => {
     if (!reload) {
@@ -108,8 +93,6 @@ const Template: ComponentStory<typeof NotificationList> = (args) => <Notificatio
 
 export const General = Template.bind({});
 General.args = {
-  verticalAlign: 'top',
-  horisontalAlign: 'right',
   onClick: action('Клик по уведомлению'),
   onToggleButtonClick: action('Клик по кнопке "Отметить все как прочитанное"'),
   onShowAllButtonClick: action('Клик по кнопке "Все уведомления"'),
@@ -166,8 +149,6 @@ General.args = {
 
 export const OneNotification = Template.bind({});
 OneNotification.args = {
-  verticalAlign: 'bottom',
-  horisontalAlign: 'left',
   isToggleButtonDisabled: true,
   onClick: action('Клик по уведомлению'),
   onToggleButtonClick: action('Клик по кнопке "Отметить все как прочитанное"'),
@@ -186,8 +167,6 @@ OneNotification.args = {
 
 export const TwoNotifications = Template.bind({});
 TwoNotifications.args = {
-  verticalAlign: 'bottom',
-  horisontalAlign: 'right',
   onClick: action('Клик по уведомлению'),
   onToggleButtonClick: action('Клик по кнопке "Отметить все как прочитанное"'),
   onShowAllButtonClick: action('Клик по кнопке "Все уведомления"'),

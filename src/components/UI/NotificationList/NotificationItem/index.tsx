@@ -10,13 +10,16 @@ import {
   DateTime,
 } from './styles';
 
-interface Props {
+export interface Notification {
   id: number;
   title: string;
   author: string;
   dateTime: string;
   isViewed: boolean;
   avatar?: string;
+}
+
+interface Props extends Notification {
   onClick?: (id: number, event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
@@ -30,9 +33,7 @@ export const NotificationItem = ({
   onClick,
 }:Props) => {
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (onClick && typeof (onClick) === 'function') {
-      onClick(id, event);
-    }
+    onClick?.(id, event);
   };
   return (
     <Item onClick={handleClick} isViewed={isViewed}>

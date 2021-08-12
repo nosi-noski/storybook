@@ -17,27 +17,27 @@ export const Paper = styled(MuiPaper)<PaperProps>`
     if (!count) {
       return '450px';
     }
-    if (count === 1) {
-      return '141px';
-    }
-    return '200px';
+    return '141px';
   }};
-  max-height: ${({ count }) => {
-    if (!count) {
-      return '450px';
-    }
-    if (count === 1) {
-      return '141px';
-    }
-    return '450px';
-  }};
+  max-height: 450px;
   ${({ vertical, horizontal }) => css`
       ${vertical}: 0;
       ${horizontal}: 0;
       direction: ${horizontal === 'left' ? 'rtl' : 'ltr'};
   `};
   border-radius: 0px 0px 2px 2px;
-  box-shadow: ${({ vertical, theme: { custom: { lightTheme: { colors: { boxShadow: { paper } } } } } }) => css`
+  box-shadow: ${({
+    vertical,
+    theme: {
+      custom: {
+        lightTheme: {
+          colors: {
+            boxShadow: { paper },
+          },
+        },
+      },
+    },
+  }) => css`
     ${vertical === 'top' ? paper.alignTop : paper.alignBottom};
   `};
   position: absolute;

@@ -1,22 +1,13 @@
 import React from 'react';
-import { NotificationItem as MuiNotificationItem } from '../NotificationItem';
+import { NotificationItem as MuiNotificationItem, Notification } from '../NotificationItem';
 import {
   Middle,
   Bottom,
   Button,
 } from '../styled';
 
-interface NotificationItem {
-  id: number;
-  title: string;
-  author: string;
-  dateTime: string;
-  isViewed: boolean;
-  avatar?: string;
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
-}
 interface Props {
-  notificationList: NotificationItem[],
+  notificationList: Notification[],
   onClick?: (id: number, event: React.MouseEvent<HTMLDivElement>) => void;
   onToggleButtonClick?: () => void;
   onShowAllButtonClick?: () => void;
@@ -31,30 +22,9 @@ export const FilledList = ({
 }:Props) => (
   <>
     <Middle>
-      {
-        notificationList.map((item) => {
-          const {
-            id,
-            title,
-            author,
-            dateTime,
-            avatar,
-            isViewed,
-          } = item;
-          return (
-            <MuiNotificationItem
-              key={id}
-              id={id}
-              title={title}
-              author={author}
-              dateTime={dateTime}
-              avatar={avatar}
-              isViewed={isViewed}
-              onClick={onClick}
-            />
-          );
-        })
-      }
+      {notificationList.map((item) => (
+        <MuiNotificationItem key={item.id} onClick={onClick} {...item} />
+      ))}
     </Middle>
     <Bottom>
       <Button
