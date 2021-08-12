@@ -4,13 +4,13 @@ import { Button as MuiButton } from '../Button';
 import { Typography } from '../Typography';
 import EmptyNotificationListImg from '../../../assets/Empty-Notification-List.png';
 
-interface Props {
+interface PaperProps {
   count: number;
   vertical: string;
   horizontal: string;
 }
 
-export const Paper = styled(MuiPaper)<Props>`
+export const Paper = styled(MuiPaper)<PaperProps>`
   width: 375px;
   max-width: 375px;
   min-height: ${({ count }) => {
@@ -34,9 +34,12 @@ export const Paper = styled(MuiPaper)<Props>`
   ${({ vertical, horizontal }) => css`
       ${vertical}: 0;
       ${horizontal}: 0;
+      direction: ${horizontal === 'left' ? 'rtl' : 'ltr'};
   `};
   border-radius: 0px 0px 2px 2px;
-  box-shadow: ${(props) => props.theme.custom.lightTheme.colors.boxShadow.paper};
+  box-shadow: ${({ vertical, theme: { custom: { lightTheme: { colors: { boxShadow: { paper } } } } } }) => css`
+    ${vertical === 'top' ? paper.alignTop : paper.alignBottom};
+  `};
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -62,6 +65,7 @@ export const Middle = styled.div`
 `;
 
 export const Bottom = styled.div`
+  direction: ltr;
   height: 36px;
   padding: 8px 0;
   display: flex;

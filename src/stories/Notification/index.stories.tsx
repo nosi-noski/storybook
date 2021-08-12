@@ -92,6 +92,16 @@ function NotificationList({
 export default {
   title: 'UI/Component/Notification',
   component: NotificationList,
+  argTypes: {
+    verticalAlign: {
+      options: ['top', 'bottom'],
+      control: { type: 'radio' },
+    },
+    horisontalAlign: {
+      options: ['left', 'right'],
+      control: { type: 'radio' },
+    },
+  },
 } as ComponentMeta<typeof NotificationList>;
 
 const Template: ComponentStory<typeof NotificationList> = (args) => <NotificationList {...args} />;

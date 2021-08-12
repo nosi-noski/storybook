@@ -6,6 +6,7 @@ interface Props {
 }
 
 export const Item = styled.div<Props>`
+  direction: ltr;
   display: flex;
   flex-direction: row;
   width: -webkit-fill-available;
