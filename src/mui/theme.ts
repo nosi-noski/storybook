@@ -103,7 +103,10 @@ interface Mode {
       }
     };
     boxShadow: {
-      paper: string;
+      paper: {
+        alignTop: string;
+        alignBottom: string;
+      }
     };
   }
 }
@@ -254,7 +257,10 @@ export const theme = createTheme({
           },
         },
         boxShadow: {
-          paper: '0px 11px 15px 0px rgba(0, 0, 0, 0.2), 0px 9px 46px 0px rgba(0, 0, 0, 0.12) , 0px 24px 38px 0px rgb(0, 0, 0, 0.14)',
+          paper: {
+            alignTop: '0px 2px 4px rgb(0 0 0 / 14%), 0px 4px 5px rgb(0 0 0 / 12%), 0px 1px 10px rgb(0 0 0 / 20%), 0px 4px 5px rgb(0 0 0 / 12%);',
+            alignBottom: '0px 1px 10px rgb(0 0 0 / 20%), 0px 4px 5px rgb(0 0 0 / 12%), 0px 1px 10px rgb(0 0 0 / 20%), 0px 4px 5px rgb(0 0 0 / 12%);',
+          },
         },
       },
     },
