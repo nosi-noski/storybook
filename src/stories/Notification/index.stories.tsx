@@ -15,9 +15,9 @@ type NotificationItem = {
 
 interface Props {
   notificationList: NotificationItem[];
-  elementOnClick?: (id: number, event: React.MouseEvent<HTMLDivElement>) => void;
-  toggleButtonOnClick?: () => void;
-  showAllButtonOnClick?: () => void;
+  onClick?: (id: number, event: React.MouseEvent<HTMLDivElement>) => void;
+  onToggleButtonClick?: () => void;
+  onShowAllButtonClick?: () => void;
   isToggleButtonDisabled?: boolean;
   verticalAlign?: string;
   horisontalAlign?: string;
@@ -25,9 +25,9 @@ interface Props {
 
 function NotificationList({
   notificationList,
-  elementOnClick,
-  toggleButtonOnClick,
-  showAllButtonOnClick,
+  onClick,
+  onToggleButtonClick,
+  onShowAllButtonClick,
   isToggleButtonDisabled,
   horisontalAlign,
   verticalAlign,
@@ -46,13 +46,13 @@ function NotificationList({
     const changedNotifications = makeAllIsViewed(notifications);
     setIsDisabled(true);
     setNotifications([...changedNotifications]);
-    if (toggleButtonOnClick) {
-      toggleButtonOnClick();
+    if (onToggleButtonClick) {
+      onToggleButtonClick();
     }
   };
   const handleShowAllButtonClick = () => {
-    if (showAllButtonOnClick) {
-      showAllButtonOnClick();
+    if (onShowAllButtonClick) {
+      onShowAllButtonClick();
     }
   };
   const handleElementClick = (id: number, event: React.MouseEvent<HTMLDivElement>) => {
@@ -63,8 +63,8 @@ function NotificationList({
       return notification;
     });
     setNotifications([...changedList]);
-    if (elementOnClick) {
-      elementOnClick(id, event);
+    if (onClick) {
+      onClick(id, event);
     }
   };
   useEffect(() => {
@@ -81,9 +81,9 @@ function NotificationList({
       verticalAlign={verticalAlign}
       horisontalAlign={horisontalAlign}
       notificationList={notifications}
-      elementOnClick={handleElementClick}
-      toggleButtonOnClick={handletoggleButtonClick}
-      showAllButtonOnClick={handleShowAllButtonClick}
+      onClick={handleElementClick}
+      onToggleButtonClick={handletoggleButtonClick}
+      onShowAllButtonClick={handleShowAllButtonClick}
       isToggleButtonDisabled={isDisabled}
     />
   );
@@ -110,9 +110,9 @@ export const General = Template.bind({});
 General.args = {
   verticalAlign: 'top',
   horisontalAlign: 'right',
-  elementOnClick: action('Клик по уведомлению'),
-  toggleButtonOnClick: action('Клик по кнопке "Отметить все как прочитанное"'),
-  showAllButtonOnClick: action('Клик по кнопке "Все уведомления"'),
+  onClick: action('Клик по уведомлению'),
+  onToggleButtonClick: action('Клик по кнопке "Отметить все как прочитанное"'),
+  onShowAllButtonClick: action('Клик по кнопке "Все уведомления"'),
   notificationList: [
     {
       id: 1,
@@ -169,9 +169,9 @@ OneNotification.args = {
   verticalAlign: 'bottom',
   horisontalAlign: 'left',
   isToggleButtonDisabled: true,
-  elementOnClick: action('Клик по уведомлению'),
-  toggleButtonOnClick: action('Клик по кнопке "Отметить все как прочитанное"'),
-  showAllButtonOnClick: action('Клик по кнопке "Все уведомления"'),
+  onClick: action('Клик по уведомлению'),
+  onToggleButtonClick: action('Клик по кнопке "Отметить все как прочитанное"'),
+  onShowAllButtonClick: action('Клик по кнопке "Все уведомления"'),
   notificationList: [
     {
       id: 2,
@@ -188,9 +188,9 @@ export const TwoNotifications = Template.bind({});
 TwoNotifications.args = {
   verticalAlign: 'bottom',
   horisontalAlign: 'right',
-  elementOnClick: action('Клик по уведомлению'),
-  toggleButtonOnClick: action('Клик по кнопке "Отметить все как прочитанное"'),
-  showAllButtonOnClick: action('Клик по кнопке "Все уведомления"'),
+  onClick: action('Клик по уведомлению'),
+  onToggleButtonClick: action('Клик по кнопке "Отметить все как прочитанное"'),
+  onShowAllButtonClick: action('Клик по кнопке "Все уведомления"'),
   notificationList: [
     {
       id: 1,
@@ -213,9 +213,9 @@ TwoNotifications.args = {
 
 export const ThreeNotifications = Template.bind({});
 ThreeNotifications.args = {
-  elementOnClick: action('Клик по уведомлению'),
-  toggleButtonOnClick: action('Клик по кнопке "Отметить все как прочитанное"'),
-  showAllButtonOnClick: action('Клик по кнопке "Все уведомления"'),
+  onClick: action('Клик по уведомлению'),
+  onToggleButtonClick: action('Клик по кнопке "Отметить все как прочитанное"'),
+  onShowAllButtonClick: action('Клик по кнопке "Все уведомления"'),
   notificationList: [
     {
       id: 1,
