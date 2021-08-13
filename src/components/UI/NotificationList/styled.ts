@@ -21,8 +21,8 @@ export const Paper = styled(MuiPaper)<PaperProps>`
   }};
   max-height: 450px;
   ${({ vertical, horizontal }) => css`
-      ${vertical}: 0;
-      ${horizontal}: 0;
+      ${vertical}: 10px;
+      ${horizontal}: 10px;
       direction: ${horizontal === 'left' ? 'rtl' : 'ltr'};
   `};
   border-radius: 0px 0px 2px 2px;

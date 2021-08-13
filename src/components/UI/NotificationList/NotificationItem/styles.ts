@@ -27,7 +27,7 @@ export const MessageRow = styled.span`
   display: flex;
   max-height: 40px;
   overflow: hidden;
-  word-break: break-all;
+  word-break: break-word;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
