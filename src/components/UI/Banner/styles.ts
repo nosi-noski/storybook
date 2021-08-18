@@ -37,8 +37,6 @@ export const ContainerColorVariants = {
 
 interface Props {
   color: keyof typeof ContainerColorVariants;
-  vertical: string;
-  horizontal: string;
 }
 
 export const Container = styled.div<Props>`
@@ -52,29 +50,6 @@ export const Container = styled.div<Props>`
   min-height: 36px;
   padding: 16px 16px 0;
   border-radius: ${(props) => props.theme.custom.border.radius12};
-  ${({ horizontal }) => {
-    if (!horizontal) {
-      return css`
-        margin-left: auto;
-        margin-right: auto;
-        left: 0;
-        right: 0;
-      `;
-    }
-    return css`${horizontal}: 0;`;
-  }};
-  
-  ${({ vertical }) => {
-    if (!vertical) {
-      return css`
-          margin-top: auto;
-          margin-bottom: auto;
-          top: 0;
-          bottom: 0;
-        `;
-    }
-    return css`vertical: 0;`;
-  }};
   ${({ color }) => css`${ContainerColorVariants[color]};`};
 `;
 
