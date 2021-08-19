@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Counter } from '../../components/UI/Counter';
 
 export default {
-  title: 'Z_Draft/Counter',
+  title: 'UI/Component/Counter',
   component: Counter,
   argTypes: {
     color: {
