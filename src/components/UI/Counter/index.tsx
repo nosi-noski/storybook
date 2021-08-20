@@ -15,9 +15,7 @@ export const Counter = ({
   children,
 }:BadgeProps) => {
   const formatNumber = useCallback((value: number | undefined, isShowError: boolean) => {
-    console.log('isError', isShowError);
     if (isShowError) {
-      console.log('isError', isShowError);
       return '!';
     }
     const abs = Math.abs(value);
@@ -25,7 +23,6 @@ export const Counter = ({
       const formattedValue = `${Math.sign(value) * parseFloat((abs / 1000).toFixed(1))}K`;
       return formattedValue.replace('.', ',');
     }
-    console.log('value', value);
     return value;
   }, []);
   return (
