@@ -18,7 +18,7 @@ export const Info = Template.bind({});
 Info.args = {
   title: 'Мы не смогли получить ваши данные с Госуслуг.',
   color: 'info',
-  buttons: [{
+  actions: [{
     label: 'Вернуться и попробовать ещё раз',
     onClick: action('Клик по кнопке'),
   }],
@@ -28,7 +28,7 @@ export const Success = Template.bind({});
 Success.args = {
   title: 'Мы не смогли получить ваши данные с Госуслуг.',
   color: 'success',
-  buttons: [{
+  actions: [{
     label: 'Запонить вручную',
     onClick: action('Клик по кнопке'),
   }],
@@ -38,7 +38,7 @@ export const Warning = Template.bind({});
 Warning.args = {
   title: 'Мы не смогли получить ваши данные с Госуслуг.',
   color: 'warning',
-  buttons: [{
+  actions: [{
     label: 'Запонить вручную',
     onClick: action('Клик по кнопке'),
   }],
@@ -48,7 +48,7 @@ export const Error = Template.bind({});
 Error.args = {
   title: 'Мы не смогли получить ваши данные с Госуслуг.',
   color: 'error',
-  buttons: [
+  actions: [
     {
       label: 'Запонить вручную',
       onClick: action('Клик по кнопке "Заполнить вручную"'),
@@ -64,7 +64,7 @@ export const Gradient = Template.bind({});
 Gradient.args = {
   title: 'Мы не смогли получить ваши данные с Госуслуг.',
   color: 'gradient',
-  buttons: [
+  actions: [
     {
       label: 'Запонить вручную',
       onClick: action('Клик по кнопке "Заполнить вручную"'),
@@ -79,7 +79,7 @@ Gradient.args = {
 export const LongTitle = Template.bind({});
 LongTitle.args = {
   title: 'Мы не смогли получить ваши данные с Госуслуг. Попробуйте ещё раз или заполните вручную.',
-  buttons: [
+  actions: [
     {
       label: 'Запонить вручную',
       onClick: action('Клик по кнопке "Заполнить вручную"'),

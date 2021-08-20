@@ -7,37 +7,44 @@ import {
   ContainerColorVariants,
 } from './styles';
 
-export interface ButtonProps {
+interface ButtonBannerProps {
   label: string;
   onClick?: () => void;
 }
 
+type TBannerActions = Array<ButtonBannerProps> & {
+  0?: ButtonBannerProps,
+  1?: ButtonBannerProps,
+};
+
 interface Props {
   title: string;
   color?: keyof typeof ContainerColorVariants;
-  buttons?: ButtonProps[];
+  actions?: TBannerActions;
 }
 export function Banner({
   title,
   color = 'info',
-  buttons,
+  actions,
 }:Props) {
   return (
     <Container color={color}>
       <Title>{title}</Title>
+      { actions && (
       <ButtonContainer>
-        { buttons?.map(
-          (button) => (
+        { actions.map(
+          (action) => (
             <Button
-              hasMargin={buttons.length > 1}
+              hasMargin={actions.length > 1}
               size="small"
               assign="outlined"
-              onClick={button.onClick}
-            >{button.label}
+              onClick={action.onClick}
+            >{action.label}
             </Button>
           ),
         )}
       </ButtonContainer>
+      )}
     </Container>
   );
 }

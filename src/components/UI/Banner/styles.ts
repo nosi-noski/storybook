@@ -45,7 +45,6 @@ export const Container = styled.div<Props>`
   justify-content: space-between;
   flex-direction: row;
   flex-flow: row wrap;
-  width: 688px;
   max-width: 688px;
   min-height: 36px;
   padding: 16px 16px 0;
