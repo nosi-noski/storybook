@@ -1,18 +1,22 @@
 import styled, { css } from 'styled-components';
+import { Badge as MuiBadge } from '@material-ui/core';
 
 export const CounterColorVariants = {
-  yellow: css`
+  warning: css`
     ${({ theme: { custom: { lightTheme: { colors: { background, typographyAndIcons } } } } }) => css`
-      color: ${typographyAndIcons.default.active};
-      background: ${background.brand};
+      .MuiBadge-colorWarning {
+        color: ${typographyAndIcons.default.active};
+        background: ${background.brand};
+      }
     `};
   `,
-  red: css`
+  error: css`
     ${({ theme: { custom: { lightTheme: { colors: { background, typographyAndIcons } } } } }) => css`
-      color: ${background.white};
-      background: ${typographyAndIcons.default.error};
+      .MuiBadge-colorError {
+        color: ${background.white};
+        background: ${typographyAndIcons.default.error};
+      }
     `};
-   
   `,
 };
 
@@ -20,17 +24,18 @@ interface Props {
   count?: number;
   color: keyof typeof CounterColorVariants;
 }
-export const Container = styled.div<Props>`
-  min-width: 14px;
-  width: fit-content;
-  min-height: 14px;
-  border-radius: 8px;
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 14px;
-  letter-spacing: 0.4px;
+
+export const Badge = styled(MuiBadge)<Props>`
+.MuiBadge-badge {
+  display: flex;
+  align-items: center;
   text-align: center;
+  min-width: 14px;
+  min-height: 14px;
+  height: 14px;
+  line-height: 14px;
+  font-size: 10px;
+  letter-spacing: 0.4px;
   padding: ${({ count }) => {
     if (typeof (count) === 'undefined') {
       return 0;
@@ -40,5 +45,6 @@ export const Container = styled.div<Props>`
     }
     return 0;
   }};
-  ${({ color }) => css`${CounterColorVariants[color]};`};
+}
+  ${({ color }) => css`${CounterColorVariants[color]}`};
 `;
