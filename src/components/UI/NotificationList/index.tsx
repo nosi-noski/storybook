@@ -19,8 +19,8 @@ interface Props {
   onToggleButtonClick?: () => void;
   onShowAllButtonClick?: () => void;
   isToggleButtonDisabled?: boolean;
-  verticalAlign?: string;
-  horisontalAlign?: string;
+  verticalAlign?: 'top' | 'bottom';
+  horisontalAlign?: 'left' | 'right';
 }
 
 export function NotificationList({
