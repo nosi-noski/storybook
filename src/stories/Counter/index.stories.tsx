@@ -37,7 +37,7 @@ export default {
   component: Counter,
   argTypes: {
     color: {
-      options: ['error', 'warning'],
+      options: ['red', 'yellow'],
       control: { type: 'radio' },
     },
   },
@@ -48,6 +48,6 @@ const Template: ComponentStory<typeof Counter> = (args) => <Counter {...args} />
 export const General = Template.bind({});
 General.args = {
   count: 1200,
-  color: 'error',
+  color: 'red',
   isError: false,
 };

@@ -4,16 +4,20 @@ import { Badge } from './styles';
 
 interface CounterProps {
   count?: number;
-  color?: 'error' | 'warning';
+  color?: 'red' | 'yellow';
   isError?: boolean;
   children: React.ReactNode;
 }
 export const Counter = ({
   count,
-  color = 'error',
+  color = 'red',
   isError = false,
   children,
 }:CounterProps) => {
+  const colorMap = {
+    red: 'error',
+    yellow: 'warning',
+  };
   const formatNumber = (value: number | undefined, isShowError: boolean) => {
     if (isShowError) {
       return '!';
@@ -34,8 +38,8 @@ export const Counter = ({
     >
       <Badge
         max={999}
-        badgeContent={badgeContent}
-        color={color}
+        badgeContent={badgeContent()}
+        color={colorMap[color]}
         count={count}
         showZero
       >
