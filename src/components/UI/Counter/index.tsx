@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Tooltip } from '../Tooltip';
 import { Badge } from './styles';
 
-export interface BadgeProps {
+interface CounterProps {
   count?: number;
   color?: 'error' | 'warning';
   isError?: boolean;
@@ -13,8 +13,8 @@ export const Counter = ({
   color = 'error',
   isError = false,
   children,
-}:BadgeProps) => {
-  const formatNumber = useCallback((value: number | undefined, isShowError: boolean) => {
+}:CounterProps) => {
+  const formatNumber = (value: number | undefined, isShowError: boolean) => {
     if (isShowError) {
       return '!';
     }
@@ -24,7 +24,8 @@ export const Counter = ({
       return formattedValue.replace('.', ',');
     }
     return value;
-  }, []);
+  };
+  const badgeContent = useCallback(() => (formatNumber(count, isError)), [count, isError]);
   return (
     <Tooltip
       title="Не удалось получить уведомления"
@@ -33,7 +34,7 @@ export const Counter = ({
     >
       <Badge
         max={999}
-        badgeContent={formatNumber(count, isError)}
+        badgeContent={badgeContent}
         color={color}
         count={count}
         showZero
