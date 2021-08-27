@@ -9,7 +9,7 @@ import { TextField } from '../../components/UI/TextField';
 import { Popover as MuiPopover } from '../../components/UI/Popover';
 import { TSlides } from '../../components/UI/Popover/Onboarding';
 
-interface Props {
+interface Props extends MuiPopover {
   type?: 'helper' | 'onboarding';
   content: string | TSlides;
   arrow?: boolean;

@@ -1,16 +1,9 @@
 import React from 'react';
+import { TooltipProps } from '@material-ui/core';
+import { PopoverProps } from './interfaces';
 import { Tooltip, TooltipTypeVariants } from './styles';
 import { Helper } from './Helper';
 import { Onboarding, TSlides } from './Onboarding';
-
-interface Props {
-  type?: keyof typeof TooltipTypeVariants;
-  open: boolean;
-  setIsOpen: () => void;
-  content: string | TSlides;
-  arrow?: boolean;
-  children?: React.ReactElement;
-}
 
 export function Popover({
   type = 'helper',
@@ -19,12 +12,14 @@ export function Popover({
   content,
   arrow,
   children,
-}:Props) {
+  ...props
+}:PopoverProps) {
   const contentType = type as string === 'onboarding'
     ? <Onboarding slides={content as TSlides} setIsOpen={setIsOpen} />
     : <Helper title={content as string} />;
   return (
     <Tooltip
+      {...props}
       title={contentType}
       type={type}
       open={open}

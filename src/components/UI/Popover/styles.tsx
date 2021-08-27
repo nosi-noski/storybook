@@ -1,8 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { Tooltip as MuiTooltip } from '@material-ui/core';
+import { TooltipProps, TooltipStylesMapType } from './interfaces';
 
-export const TooltipTypeVariants = {
+export const TooltipTypeVariants:TooltipStylesMapType = {
   helper: css`
     padding: 12px 16px;
     width: 400px;
@@ -14,12 +15,9 @@ export const TooltipTypeVariants = {
   `,
 };
 
-interface Props {
-  type?: keyof typeof TooltipTypeVariants;
-}
 export const Tooltip = styled(({ className, ...props }) => (
   <MuiTooltip {...props} classes={{ popper: className }} />
-))<Props>`
+))<TooltipProps>`
   & .MuiTooltip-tooltip {
     border-radius: ${(props) => props.theme.custom.border.radius12};
     color: ${(props) => props.theme.custom.lightTheme.colors.typographyAndIcons.inverse.active};
