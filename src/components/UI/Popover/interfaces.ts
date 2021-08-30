@@ -1,6 +1,6 @@
 import { TooltipProps as MuiTooltipProps } from '@material-ui/core';
 import { DefaultTheme, FlattenInterpolation, ThemedStyledProps } from 'styled-components';
-import { TSlides } from './Onboarding'
+import { TSlides } from './Onboarding/Slide'
 import { TooltipTypeVariants } from './styles'
 
 export interface TooltipProps extends MuiTooltipProps {
