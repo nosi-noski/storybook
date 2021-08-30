@@ -27,6 +27,8 @@ export interface SlideProps {
   stepper?: JSX.Element;
 }
 
+export type TSlides = Array<SlideProps>;
+
 export function Slide({
   title,
   content,
@@ -51,7 +53,7 @@ export function Slide({
                 action.callback?.();
               };
               return (
-                <Button onClick={handleClick}>
+                <Button key={action.label} onClick={handleClick}>
                   {action.label}
                 </Button>
               );

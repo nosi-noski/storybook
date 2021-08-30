@@ -4,10 +4,8 @@ import {
   Typography,
   Button,
 } from '@material-ui/core';
-import { Slide, SlideProps } from './Slide';
-import { MobileStepper } from './styles';
-
-export type TSlides = Array<SlideProps>;
+import { Slide, TSlides } from './Slide';
+import { Stepper } from './Stepper';
 
 interface Props {
   slides: TSlides;
@@ -15,15 +13,25 @@ interface Props {
 export function Onboarding({
   slides,
 }:Props) {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
   const maxSteps = slides.length;
   const handleNext = (callback?: () => void) => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setActiveStep((prevActiveStep) => {
+      if (prevActiveStep === maxSteps - 1) {
+        return prevActiveStep;
+      }
+      return prevActiveStep + 1;
+    });
     callback?.();
   };
 
   const handleBack = (callback?: () => void) => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setActiveStep((prevActiveStep) => {
+      if (prevActiveStep === 0) {
+        return prevActiveStep;
+      }
+      return prevActiveStep - 1;
+    });
     callback?.();
   };
   const activeSlide = slides[activeStep];
@@ -38,16 +46,16 @@ export function Onboarding({
   });
   return (
     <Slide
+      key={activeSlide.title}
       title={activeSlide.title}
       content={activeSlide.content}
       actions={activeSlide.actions}
       stepper={
         maxSteps > 1 ? (
-          <MobileStepper
-            steps={maxSteps}
-            variant="dots"
-            position="static"
+          <Stepper
+            steps={slides}
             activeStep={activeStep}
+            setActiveStep={setActiveStep}
           />
         ) : undefined
       }

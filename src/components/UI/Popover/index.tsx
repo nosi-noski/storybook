@@ -3,7 +3,8 @@ import { TooltipProps } from '@material-ui/core';
 import { PopoverProps } from './interfaces';
 import { Tooltip } from './styles';
 import { Helper } from './Helper';
-import { Onboarding, TSlides } from './Onboarding';
+import { Onboarding } from './Onboarding';
+import { TSlides } from './Onboarding/Slide';
 
 export function Popover({
   type = 'helper',

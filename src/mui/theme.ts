@@ -1,4 +1,11 @@
-import { createTheme } from '@material-ui/core/styles';
+import {
+  createTheme,
+  createMuiTheme,
+  Palette,
+  ThemeOptions,
+  Theme,
+} from '@material-ui/core/styles';
+import createPalette from '@material-ui/core/styles/createPalette';
 
 interface ButtonBackGroundColor {
   active: string;
@@ -14,6 +21,20 @@ interface ButtonBorderColor {
   focused: string;
   pressed: string;
   disabled: string;
+}
+
+interface BasePalleteColor {
+  50?: string;
+  100?: string;
+  200?: string;
+  300?: string;
+  400?: string;
+  500?: string;
+  600?: string;
+  700?: string;
+  800?: string;
+  900?: string;
+
 }
 
 interface Mode {
@@ -119,8 +140,12 @@ declare module '@material-ui/core/styles/createTheme' {
         beelineIcons: string;
       };
       border: {
+        radius8: string;
         radius12: string;
       };
+      pallete: {
+        primary: BasePalleteColor;
+      }
     };
   }
   interface ThemeOptions extends Theme {} // eslint-disable-line
@@ -137,7 +162,7 @@ export const theme = createTheme({
     lightTheme: {
       colors: {
         background: {
-          default: 'rgba(0, 0, 0, 0.1)',
+          default: 'rgba(255, 255, 255, 1)',
           inverse: 'rgba(33, 33, 33, 1)',
           brand: 'rgba(253, 216, 53, 1)',
           controls: 'rgba(0, 0, 0, 0.08)',
@@ -268,7 +293,13 @@ export const theme = createTheme({
       beelineIcons: 'BeelineIcons',
     },
     border: {
+      radius8: '8px',
       radius12: '12px',
+    },
+    pallete: {
+      primary: {
+        200: 'rgba(255, 245, 157, 1)',
+      },
     },
   },
 });

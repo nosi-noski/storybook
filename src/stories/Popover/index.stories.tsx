@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { Button } from '../../components/UI/Button';
 import { Popover } from '../../components/UI/Popover';
-import { TSlides } from '../../components/UI/Popover/Onboarding';
+import { Button } from '../../components/UI/Button';
 
 export default {
-  title: 'UI/A_Draft/Popover',
+  title: 'UI/Component/Popover',
   component: Popover,
 } as ComponentMeta<typeof Popover>;
 
@@ -63,6 +62,11 @@ Slides.args = {
       content: 'Теперь вы можете отправлять заявку в HelpDesk силой мысли',
       actions: [
         {
+          label: 'Назад',
+          type: 'back',
+          onClick: action('Назад'),
+        },
+        {
           label: 'Далее',
           type: 'next',
           onClick: action('Далее'),
@@ -87,12 +91,49 @@ Slides.args = {
     },
     {
       title: 'Третий слайд',
-      content: 'Теперь вы можете отправлять заявку в HelpDesk силой мысли',
+      content: 'Теперь вы можете отправлять заявку в HelpDesk силой мысли 3',
       actions: [
         {
           label: 'Назад',
           type: 'back',
           onClick: action('Назад'),
+        },
+        {
+          label: 'Далее',
+          type: 'next',
+          onClick: action('Далее'),
+        },
+      ],
+    },
+    {
+      title: 'Четвёртый слайд',
+      content: 'Теперь вы можете отправлять заявку в HelpDesk силой мысли 4',
+      actions: [
+        {
+          label: 'Назад',
+          type: 'back',
+          onClick: action('Назад'),
+        },
+        {
+          label: 'Далее',
+          type: 'next',
+          onClick: action('Далее'),
+        },
+      ],
+    },
+    {
+      title: 'Пятый слайд',
+      content: 'Теперь вы можете отправлять заявку в HelpDesk силой мысли 5',
+      actions: [
+        {
+          label: 'Назад',
+          type: 'back',
+          onClick: action('Назад'),
+        },
+        {
+          label: 'Далее',
+          type: 'next',
+          onClick: action('Далее'),
         },
       ],
     },
