@@ -1,7 +1,8 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
-import { TextField as MuiTextField } from '@material-ui/core';
+import { TextField as MuiTextField, TextFieldClasses } from '@material-ui/core';
 
-export const TextFieldSizeVariants = {
+const TextFieldSizeVariants = {
   small: css`
     ${() => css`
 
@@ -61,11 +62,11 @@ export const TextFieldSizeVariants = {
   `,
 };
 
-interface Props {
+export interface TextFieldProps extends TextFieldClasses {
   size?: keyof typeof TextFieldSizeVariants
 }
 
-export const TextField = styled(MuiTextField).attrs({ variant: 'outlined' })<Props>`
+export const TextField = styled(MuiTextField).attrs({ variant: 'outlined' })<TextFieldProps>`
 
   ${({ size }) => css` ${TextFieldSizeVariants[size || 'small']}; `};
   border: transparent;
