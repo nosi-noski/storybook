@@ -1,14 +1,17 @@
 import React from 'react';
-import { MuiLabel, ColorLabelVariants } from './styles';
+import { Label as MuiLabel, ColorLabelVariants } from './styles';
+import { LabelProps } from './interfaces';
 
-interface Props {
-  type?: keyof typeof ColorLabelVariants;
-  children?: string | JSX.Element;
-}
-
-export function Label({ type = 'default', children = '' }: Props) {
+export function Label({
+  type = 'default',
+  children = '',
+  ...props
+}: LabelProps) {
   return (
-    <MuiLabel category={type}>
+    <MuiLabel
+      {...props}
+      type={type}
+    >
       {children}
     </MuiLabel>
   );
