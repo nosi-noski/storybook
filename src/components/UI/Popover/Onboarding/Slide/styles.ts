@@ -16,28 +16,20 @@ export const Content = styled(Typography).attrs({ variant: 'body3' })`
 export const Bottom = styled.div`
   display: flex;
   justify-content: flex-end;
+  flex-direction: row;
 `;
 
 export const Button = styled(MiuButton).attrs({ assign: 'plain' })`
   color: ${(props) => props.theme.custom.pallete.primary[200]};
 `;
 
-export const Dots = styled.div`
+export const Buttons = styled.div`
   display: flex;
-  align-items: center;
-`;
+  justify-content: flex-end;
+  width: 100%;
+  `;
 
-export const Dot = styled.div`
-  cursor: pointer;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  margin-left: 12px;
-  background-color: rgba(102, 102, 102, 1);
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-  &.active {
-    background-color: ${(props) => props.theme.custom.lightTheme.colors.background.default};
-  }
+export const Stepper = styled.div`
+  align-self: center;
+  flex: 1 1 auto;
 `;

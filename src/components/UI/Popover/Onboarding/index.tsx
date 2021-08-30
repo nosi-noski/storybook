@@ -10,12 +10,10 @@ import { MobileStepper } from './styles';
 export type TSlides = Array<SlideProps>;
 
 interface Props {
-  setIsOpen: (value: boolean) => void;
   slides: TSlides;
 }
 export function Onboarding({
   slides,
-  setIsOpen,
 }:Props) {
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = slides.length;
@@ -36,26 +34,23 @@ export function Onboarding({
     if (action.type === 'back') {
       action.callback = handleBack;
     }
-    if (action.type === 'close') {
-      action.callback = () => { setIsOpen(false); };
-    }
     return action;
   });
   return (
-    <>
-      <Slide
-        title={activeSlide.title}
-        content={activeSlide.content}
-        actions={activeSlide.actions}
-      />
-      { maxSteps > 1 && (
-        <MobileStepper
-          steps={maxSteps}
-          variant="dots"
-          position="static"
-          activeStep={activeStep}
-        />
-      )}
-    </>
+    <Slide
+      title={activeSlide.title}
+      content={activeSlide.content}
+      actions={activeSlide.actions}
+      stepper={
+        maxSteps > 1 ? (
+          <MobileStepper
+            steps={maxSteps}
+            variant="dots"
+            position="static"
+            activeStep={activeStep}
+          />
+        ) : undefined
+      }
+    />
   );
 }
