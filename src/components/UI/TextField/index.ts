@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { TextField as MuiTextField, TextFieldClasses } from '@material-ui/core';
+import { TextField as MuiTextField, StandardTextFieldProps } from '@material-ui/core';
 
 const TextFieldSizeVariants = {
   small: css`
@@ -62,7 +62,7 @@ const TextFieldSizeVariants = {
   `,
 };
 
-export interface TextFieldProps extends TextFieldClasses {
+export interface TextFieldProps extends StandardTextFieldProps {
   size?: keyof typeof TextFieldSizeVariants
 }
 
