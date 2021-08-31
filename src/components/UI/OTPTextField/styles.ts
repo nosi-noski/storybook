@@ -1,10 +1,8 @@
 import styled, { css } from 'styled-components';
 import { TextField as MuiTextField } from '../TextField';
+import { TextFieldProps } from './interface';
 
-interface Props {
-  length?: number;
-}
-export const TextField = styled(MuiTextField)<Props>`
+export const TextField = styled(MuiTextField)<TextFieldProps>`
   ${({ length }) => {
     const calcWidth = () => {
       const charLength = length || 4;

@@ -1,39 +1,6 @@
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { OTPTextField as MuiOTPTextField } from '../../components/UI/OTPTextField';
-
-interface Props {
-  value: string;
-  size: 'small' | 'medium' | 'large';
-  isError?: boolean;
-  helperText?: string;
-  length?: number;
-}
-
-function OTPTextField({
-  value,
-  size,
-  isError,
-  helperText,
-  length = 4,
-}:Props) {
-  const [otpValue, setOtpValue] = useState('');
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setOtpValue(event.target.value);
-  };
-  return (
-    <>
-      <MuiOTPTextField
-        helperText={helperText}
-        isError={isError}
-        value={value}
-        onChange={handleChange}
-        size={size}
-        length={length}
-      />
-    </>
-  );
-}
+import { OTPTextField } from '../../components/UI/OTPTextField';
 
 export default {
   title: 'UI/Component/OTPTextField',
@@ -42,6 +9,10 @@ export default {
     size: {
       options: ['small', 'medium', 'large'],
       control: { type: 'radio' },
+      defaultValue: 'small',
+    },
+    length: {
+      defaultValue: 4,
     },
   },
 } as ComponentMeta<typeof OTPTextField>;
@@ -49,7 +20,6 @@ export default {
 const Template: ComponentStory<typeof OTPTextField> = (args) => <OTPTextField {...args} />;
 export const General = Template.bind({});
 General.args = {
-  isError: false,
-  helperText: '',
-  length: 4,
+  helperText: 'helperText',
+  error: false,
 };
