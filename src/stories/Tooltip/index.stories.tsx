@@ -1,17 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Tooltip as MuiToolTip } from '../../components/UI/Tooltip';
-
-interface Props {
-  title: string;
-}
-function Tooltip({ title }:Props) {
-  return (
-    <MuiToolTip title={title}>
-      <span>Наведите курсор</span>
-    </MuiToolTip>
-  );
-}
+import { Label } from '../../components/UI/Label';
+import { Tooltip } from '../../components/UI/Tooltip';
 
 export default {
   title: 'UI/Component/Tooltip',
@@ -23,4 +13,5 @@ const Template: ComponentStory<typeof Tooltip> = (args) => <Tooltip {...args} />
 export const General = Template.bind({});
 General.args = {
   title: 'Не удалось получить уведомления',
+  children: <span>Наведите курсор</span>,
 };
